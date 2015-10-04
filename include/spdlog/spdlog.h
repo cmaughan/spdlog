@@ -102,6 +102,10 @@ std::shared_ptr<logger> stderr_logger_st(const std::string& logger_name);
 std::shared_ptr<logger> syslog_logger(const std::string& logger_name, const std::string& ident = "", int syslog_option = 0);
 #endif
 
+// Debug stream logger for windows
+#ifdef _MSC_VER
+std::shared_ptr<logger> outputdebugstring_logger_mt(const std::string& logger_name);
+#endif
 
 // Create and register a logger with multiple sinks
 std::shared_ptr<logger> create(const std::string& logger_name, sinks_init_list sinks);

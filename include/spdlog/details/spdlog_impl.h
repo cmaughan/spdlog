@@ -31,6 +31,7 @@
 #include "../sinks/file_sinks.h"
 #include "../sinks/stdout_sinks.h"
 #include "../sinks/syslog_sink.h"
+#include "../sinks/outputdebugstring_sink.h"
 
 inline void spdlog::register_logger(std::shared_ptr<logger> logger)
 {
@@ -98,6 +99,13 @@ inline std::shared_ptr<spdlog::logger> spdlog::syslog_logger(const std::string& 
 }
 #endif
 
+#ifdef _MSC_VER
+inline std::shared_ptr<spdlog::logger> spdlog::outputdebugstring_logger_mt(const std::string& logger_name)
+{
+    return create<spdlog::sinks::outputdebugstring_sink_mt>(logger_name);
+}
+
+#endif
 
 //Create logger with multiple sinks
 
