@@ -47,14 +47,15 @@ public:
 protected:
     void _sink_it(const details::log_msg& msg) override
     {
-        _ostream.write(msg.formatted.data(), msg.formatted.size());
-        if (_force_flush)
-            _ostream.flush();
+        _ostream << msg.formatted.str().substr(0, msg.formatted.size() - 2) << std::endl;
+        //_ostream.write(msg.formatted.data(), msg.formatted.size());
+        //if (_force_flush)
+          //  _ostream.flush();
     }
 
     void flush() override
     {
-        _ostream.flush();
+        //_ostream.flush();
     }
 
     std::ostream& _ostream;
