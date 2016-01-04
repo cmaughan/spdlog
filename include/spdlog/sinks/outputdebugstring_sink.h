@@ -39,7 +39,7 @@ class outputdebugstring_sink : public base_sink < Mutex >
 protected:
     void _sink_it(const details::log_msg& msg) override
     {
-        OutputDebugString(msg.formatted.c_str());
+        OutputDebugStringA(msg.formatted.c_str());
     }
 
     void flush() override
