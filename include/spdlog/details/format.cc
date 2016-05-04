@@ -609,7 +609,7 @@ FMT_FUNC void fmt::internal::report_unknown_type(char code, const char *type) {
         static_cast<unsigned>(code), type)));
 }
 
-#if FMT_USE_WINDOWS_H
+#if 0 //FMT_USE_WINDOWS_H
 
 FMT_FUNC fmt::internal::UTF8ToUTF16::UTF8ToUTF16(fmt::StringRef s) {
   static const char ERROR_MSG[] = "cannot convert string from UTF-8 to UTF-16";
@@ -669,13 +669,13 @@ FMT_FUNC void fmt::internal::format_windows_error(
 
    public:
     String() : str_() {}
-    ~String() { LocalFree(str_); }
+    ~String() { HeapFree(GetProcessHeap(), 0, (void*)str_); }
     LPWSTR *ptr() { return &str_; }
     LPCWSTR c_str() const { return str_; }
   };
   FMT_TRY {
     String system_message;
-    if (FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER |
+    if (FormatMessageW(/*FORMAT_MESSAGE_ALLOCATE_BUFFER |*/
         FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, 0,
         error_code, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
         reinterpret_cast<LPWSTR>(system_message.ptr()), 0, 0)) {
@@ -1228,7 +1228,7 @@ FMT_FUNC void fmt::report_system_error(
   report_error(internal::format_system_error, error_code, message);
 }
 
-#if FMT_USE_WINDOWS_H
+#if 0 //FMT_USE_WINDOWS_H
 FMT_FUNC void fmt::report_windows_error(
     int error_code, fmt::StringRef message) FMT_NOEXCEPT {
   report_error(internal::format_windows_error, error_code, message);

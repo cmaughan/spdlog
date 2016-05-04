@@ -740,7 +740,7 @@ inline void format_decimal(Char *buffer, UInt value, unsigned num_digits) {
 
 // Define FMT_USE_WINDOWS_H to 0 to disable use of windows.h.
 // All the functionality that relies on it will be disabled too.
-#if FMT_USE_WINDOWS_H
+#if 0 //FMT_USE_WINDOWS_H
 // A converter from UTF-8 to UTF-16.
 // It is only provided for Windows since other systems support UTF-8 natively.
 class UTF8ToUTF16 {
